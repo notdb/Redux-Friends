@@ -4,17 +4,19 @@ import "./App.css";
 import Login from "./components/Login";
 import Friends from "./components/Friends";
 import { BrowserRouter as Router, Route, Link } from "react-router-dom";
+import PrivateRoute from "./PrivateRoute";
+
 function App() {
   return (
     <Router>
       <div className="App">
         <header className="header">
           <Link to="/login">Login</Link>
-          <Link to="/friends">Friends</Link>
+          <Link to="/protected">Friends</Link>
         </header>
 
         <Route path="/login" component={Login} />
-        <Route exact path="/friends" component={Friends} />
+        <PrivateRoute exact path="/protected" component={Friends} />
       </div>
     </Router>
   );
