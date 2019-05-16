@@ -33,3 +33,21 @@ export const friendsFetcher = () => dispatch => {
       dispatch({ type: FETCHING_FRIENDS_ERROR });
     });
 };
+
+export const ADDING_FRIENDS_START = "ADDING_FRIENDS_START";
+export const ADDING_FRIENDS_SUCCESS = "ADDING_FRIENDS_SUCCESS";
+export const ADDING_FRIENDS_ERROR = "ADDING_FRIENDS_ERROR";
+
+export const addFriends = friend => dispatch => {
+  dispatch({ type: ADDING_FRIENDS_START });
+  axiosWithAuth()
+    .post("http://localhost:5000/api/friends", friend)
+    .then(res => {
+      console.log(res);
+      dispatch({ type: ADDING_FRIENDS_SUCCESS, payload: res.data });
+    })
+    .catch(err => {
+      console.log(err);
+      dispatch({ type: ADDING_FRIENDS_ERROR });
+    });
+};
