@@ -1,8 +1,17 @@
-import { LOGIN_START, LOGIN_SUCCESS, LOGIN_ERROR } from "../actions";
+import {
+  LOGIN_START,
+  LOGIN_SUCCESS,
+  LOGIN_ERROR,
+  FETCHING_FRIENDS_START,
+  FETCHING_FRIENDS_SUCCESS,
+  FETCHING_FRIENDS_ERROR
+} from "../actions";
 
 const intialState = {
   isLoggedIn: false,
-  error: ""
+  error: "",
+  fetching_friends: false,
+  friends: []
 };
 
 const reducer = (state = intialState, action) => {
@@ -18,6 +27,25 @@ const reducer = (state = intialState, action) => {
         ...state,
         isLoggedIn: false,
         error: ""
+      };
+    case FETCHING_FRIENDS_START:
+      return {
+        ...state,
+        fetching_friends: true,
+        error: ""
+      };
+    case FETCHING_FRIENDS_SUCCESS:
+      return {
+        ...state,
+        fetching_friends: false,
+        friends: action.payload,
+        error: ""
+      };
+    case FETCHING_FRIENDS_ERROR:
+      return {
+        ...state,
+        fetching_friends: false,
+        error: action.payload
       };
     default:
       return state;
